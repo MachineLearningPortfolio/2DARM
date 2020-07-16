@@ -22,18 +22,18 @@ class Ball:
         self.setState(self.position['x'], self.position['y'], self.velocity['x'], self.velocity['y']-9.81*dt)
         self.setState(self.position['x']+self.velocity['x']*dt, self.position['y']+self.velocity['y']*dt, self.velocity['x'], self.velocity['y'])
 
-dt = 0.01
 
+dt = 0.001
 ball = Ball(vx=3, vy=6)
-plt.figure()
-plt.ion()
+
+fig, ax = plt.subplots()
+ax.scatter(ball.getX(), ball.getY())
+plt.show(block=False)
 
 while ball.getY() > 0.999:
-    ball.update(dt)
-    plt.scatter(ball.getX(), ball.getY())
-    plt.axis([0, 5, 0, 5])
-    plt.draw()
-    plt.pause(0.01)
-    plt.cla()
-plt.ioff()
-plt.show()
+    ax.scatter(ball.getX(), ball.getX)
+    ax.set_ydata()
+    ax.draw_artist(ax.patch)
+    ax.draw_artist(line)
+    fig.canvas.update()
+    fig.canvas.flush_events()
