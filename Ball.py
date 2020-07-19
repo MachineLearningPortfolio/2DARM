@@ -1,4 +1,6 @@
 import numpy as np 
+import matplotlib
+matplotlib.use('TKAgg')
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 
@@ -23,18 +25,18 @@ class Ball:
         self.setState(self.position['x'], self.position['y'], self.velocity['x'], self.velocity['y']-9.81*dt)
         self.setState(self.position['x']+self.velocity['x']*dt, self.position['y']+self.velocity['y']*dt, self.velocity['x'], self.velocity['y'])
 
-
+dt = 0.01
 
 class AnimatedScatter(object):
     def __init__(self):
+        self.ball = Ball(vx=3, vy=6)
         self.stream = self.data_stream()
         self.fig, self.ax = plt.subplots()
         self.ax.plot([1,3],[1.0, 1.0], c='k')
         self.ax.plot([5,6],[1.0, 1.0], c='k')
         self.ani = animation.FuncAnimation(self.fig, self.update, interval=10,
                                           init_func=self.setup_plot, blit=True)
-        self.ball = Ball(vx=3, vy=6)
-
+        
     def setup_plot(self):
         x, y = next(self.stream).T
         self.scat = self.ax.scatter(x, y, vmin=0, vmax=1,
